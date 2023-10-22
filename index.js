@@ -1,5 +1,8 @@
 const http = require('http');
+const EventEmitter = require('events');
+
 const PORT = process.env.PORT || 5000;
+const emitter = new EventEmitter()
 
 class Router {
     constructor() {
@@ -14,7 +17,7 @@ class Router {
             throw new Error(`[${method}] on adress [${path}] already exists`);
         }
         endpoint[method] = handler;
-        //events
+        emitter.on(`[${path}]:[${method}]`, (req, res) => handler(req, res));
     }
 }
 
