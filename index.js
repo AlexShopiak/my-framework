@@ -38,8 +38,20 @@ class Router {
     }
 }
 
+
+const router = new Router();
+router.get('/users', (req, res) => {
+    res.end('Hi from users');
+})
+router.get('/posts', (req, res) => {
+    res.end('Hi from posts');
+})
+
 const server = http.createServer((req,res)=>{
-    res.end('Hi')
+    const emitted = emitter.emit(`[${req.url}]:[${req.method}]`, req, res);
+    if (!emitted) {
+        res.end();
+    }
 })
 
 server.listen(PORT, () => console.log('Started on:' + PORT));
