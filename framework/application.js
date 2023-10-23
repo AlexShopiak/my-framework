@@ -7,6 +7,10 @@ module.exports = class Application {
         this.server = this._createServer();
     }
 
+    listen(port, callback) {
+        this.server.listen(port, callback);
+    }
+
     getRouter(router) {
         Object.keys(router.endpoints).forEach(path => {
             const endpoint = router.endpoints[path];
