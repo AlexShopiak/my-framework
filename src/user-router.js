@@ -15,7 +15,9 @@ router.get('/users', (req, res) => {
 })
 
 router.post('/users', (req, res) => {
-    res.send(users);
+    const user = req.body;
+    users.push(user);
+    res.send(user);
 })
 
 module.exports = router
