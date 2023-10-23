@@ -11,7 +11,7 @@ module.exports = class Application {
         this.server.listen(port, callback);
     }
 
-    getRouter(router) {
+    addRouter(router) {
         Object.keys(router.endpoints).forEach(path => {
             const endpoint = router.endpoints[path];
             Object.keys(endpoint).forEach(method =>  {
