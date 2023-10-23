@@ -12,7 +12,6 @@ module.exports = class Router {
             throw new Error(`[${method}] on adress [${path}] already exists`);
         }
         endpoint[method] = handler;
-        //emitter.on(`[${path}]:[${method}]`, (req, res) => handler(req, res));
     }
 
     get(path, handler) {
