@@ -9,10 +9,14 @@ module.exports = class Application {
 
     _createServer() {
         return http.createServer((req,res)=>{
-            const emitted = this.emitter.emit(`[${req.url}]:[${req.method}]`, req, res);
+            const emitted = this.emitter.emit(this._getRouteMask(req.url, req.method), req, res);
             if (!emitted) {
                 res.end();
             }
         })
+    }
+
+    _getRouteMask(path, method) {
+        return `[${path}]:[${method}]`;
     }
 }
