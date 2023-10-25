@@ -4,8 +4,6 @@ const getUsers = async (req, res) => {
     let users;
     if (req.params.name) {
         users = await User.find({name:req.params.name});
-        console.log(req.params.name)
-        console.log(users)
     } else {
         users = await User.find();
     }
