@@ -1,22 +1,25 @@
-const users = [
-    {id: 1, name: 'Till'},
-    {id: 2, name: 'Richard'},
-    {id: 3, name: 'Paul'},
-    {id: 4, name: 'Christoph'},
-    {id: 5, name: 'Flake'},
-    {id: 6, name: 'Oliver'},
-]
+const User = require('./user-model.js');
 
-const getUsers = (req, res) => {
-    if (req.params.id) {
-        return res.send(users.find(user => user.id == req.params.id))
+const getUsers = async (req, res) => {
+    let users;
+    if (req.params.name) {
+        users = await User.find({name:req.params.name});
+        console.log(req.params.name)
+        console.log(users)
+    } else {
+        users = await User.find();
     }
-    res.send(users);
+
+    if (users.length == 0) {
+        res.send("User does not exist");
+    } else {
+        res.send(users);
+    }
+    
 }
 
-const createUsers = (req, res) => {
-    const user = req.body;
-    users.push(user);
+const createUsers = async (req, res) => {
+    const user = await User.create(req.body);
     res.send(user);
 }
 
